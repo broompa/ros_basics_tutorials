@@ -202,22 +202,22 @@ include_directories(
 # catkin_add_nosetests(test)
 
 #talker
-add_executable(talker src/talker.cpp)
+add_executable(talker src/basics/talker.cpp)
 target_link_libraries (talker ${catkin_LIBRARIES})
 add_dependencies(talker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 #listner
-add_executable(listener src/listener.cpp)
+add_executable(listener src/basics/listener.cpp)
 target_link_libraries (listener ${catkin_LIBRARIES})
 add_dependencies(listener ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 #add_two_ints_client
-add_executable(add_two_ints_client_tut src/add_two_ints_client.cpp)
+add_executable(add_two_ints_client_tut src/basics/add_two_ints_client.cpp)
 target_link_libraries (add_two_ints_client_tut ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_client_tut ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
 #add_two_ints_server
-add_executable(add_two_ints_server_tut src/add_two_ints_server.cpp)
+add_executable(add_two_ints_server_tut src/basics/add_two_ints_server.cpp)
 target_link_libraries (add_two_ints_server_tut ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_server_tut ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
