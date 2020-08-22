@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="turtlesim" type="turtlesim_node" name="sirius_turtlesim_node" output="screen"/>
+	<node pkg="ros_basics_tutorials" type="turtlesim_move" name="sirius_turtlesim_move" output="screen"/>
+</launch>

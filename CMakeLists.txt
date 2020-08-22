@@ -221,3 +221,8 @@ add_dependencies(add_two_ints_client_tut ${${PROJECT_NAME}_EXPORTED_TARGETS} ${c
 add_executable(add_two_ints_server_tut src/basics/add_two_ints_server.cpp)
 target_link_libraries (add_two_ints_server_tut ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_server_tut ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+#turtlesim_move
+add_executable(turtlesim_move src/turtle_sim_bot3/turtlesim_move.cpp)
+target_link_libraries (turtlesim_move ${catkin_LIBRARIES})
+add_dependencies(turtlesim_move ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
