@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 ### assignment self: write another script that implements go to goal behavior
 
 import rospy
@@ -29,4 +28,5 @@ if __name__ == '__main__':
 		moveTurtle()
 	except rospy.ROSInterruptException:
 		pass
+ 
  

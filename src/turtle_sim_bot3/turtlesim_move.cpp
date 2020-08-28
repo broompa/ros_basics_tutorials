@@ -20,6 +20,7 @@ turtlesim::Pose curr_pose;
 int main(int argc, char **argv){
 	ros::init(argc,argv,"robot_cleaner_self");
 	ros::NodeHandle n;
+	// std::string topicToPublish = "/cmd_vel"; // for burger robot
 	std::string topicToPublish = "/turtle1/cmd_vel";
 	pub = n.advertise<geometry_msgs::Twist>(topicToPublish,10);
 	Pose = n.subscribe("/turtle1/pose",10,poseCallback);
@@ -57,6 +58,15 @@ int main(int argc, char **argv){
 	// }
 	goal_pose.x = 1; goal_pose.y = 1;
 	goToGoal(goal_pose,0.25);
+	goal_pose.x = 10; goal_pose.y = 10;
+	goToGoal(goal_pose,0.25);
+	goal_pose.x = 1; goal_pose.y = 10;
+	goToGoal(goal_pose,0.25);
+	goal_pose.x = 10; goal_pose.y = 1;
+	goToGoal(goal_pose,0.25);
+	
+
+
 }
 
 
@@ -64,7 +74,7 @@ void goToGoal(turtlesim::Pose goal_pose, double distance_tolerance){
 	geometry_msgs::Twist twist ;
 	ros::Rate loop_rate(100);
 	double dist = sqrt(pow(goal_pose.x -curr_pose.x,2)+pow(curr_pose.y - goal_pose.y,2));
-	double kp = 0.2, kAngle = 1;
+	double kp = 2, kAngle = 3*kp;
 	twist.linear.x = 0; 
 	twist.linear.y = 0;
 	twist.linear.z = 0;
@@ -75,7 +85,8 @@ void goToGoal(turtlesim::Pose goal_pose, double distance_tolerance){
 	while(dist > distance_tolerance){
 		E += dist;
 		twist.linear.x = kp*dist+ E*0.0002 ;
-		twist.angular.z = kAngle*atan2((goal_pose.y - curr_pose.y), (goal_pose.x - curr_pose.x))-curr_pose.theta;
+		double e_ang = atan2((goal_pose.y - curr_pose.y), (goal_pose.x - curr_pose.x))-curr_pose.theta;
+		twist.angular.z = kAngle*(atan2(sin(e_ang),cos(e_ang))); // restriction b/w [-pi, pi]
 		pub.publish(twist);
 		ros::spinOnce();
 		loop_rate.sleep();
